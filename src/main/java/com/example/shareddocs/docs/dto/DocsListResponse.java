@@ -13,7 +13,7 @@ public class DocsListResponse {
 
   private String id;
 
-  private String roomIdx;
+  private String documentIdx;
 
   private String title;
 
@@ -34,7 +34,7 @@ public class DocsListResponse {
   public static DocsListResponse toResponse(DocsDto docsDto) {
     return DocsListResponse.builder()
                           .id(docsDto.getId())
-                          .roomIdx(docsDto.getRoomIdx())
+                          .documentIdx(docsDto.getDocumentIdx())
                           .title(docsDto.getTitle())
                           .createMemberId(docsDto.getCreateMemberId())
                           .build();

@@ -15,7 +15,7 @@ public class DocsDto {
 
   private String id;
 
-  private String roomIdx;
+  private String documentIdx;
 
   private String title;
 
@@ -43,7 +43,7 @@ public class DocsDto {
   public static DocsDto of(Docs docs) {
     return DocsDto.builder()
         .id(docs.getId())
-        .roomIdx(docs.getRoomIdx())
+        .documentIdx(docs.getDocumentIdx())
         .title(docs.getTitle())
         .content(docs.getContent())
         .createMemberId(docs.getCreateMemberId())

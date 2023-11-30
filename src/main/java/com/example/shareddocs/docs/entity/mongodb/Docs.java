@@ -23,8 +23,8 @@ public class Docs {
   @Field(name = "_id")
   private String id;
 
-  @Field(name = "room_idx")
-  private String roomIdx;
+  @Field(name = "document_idx")
+  private String documentIdx;
 
   @Field(name = "title")
   private String title;
