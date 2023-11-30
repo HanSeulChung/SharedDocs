@@ -6,6 +6,7 @@ import com.example.shareddocs.docs.entity.mongodb.Docs;
 import com.example.shareddocs.docs.entity.mongodb.DocsRepository;
 import com.example.shareddocs.docs.service.DocsService;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.UUID;
@@ -22,7 +23,7 @@ public class DocsServiceImpl implements DocsService {
     List<Docs> allDocs = docsRepository.findAll();
 
     if (allDocs.size() == 0) {
-      return null;
+      return new ArrayList<>();
     }
     return DocsDto.of(allDocs);
   }
