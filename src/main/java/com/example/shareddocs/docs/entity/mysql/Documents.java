@@ -28,9 +28,7 @@ public class Documents extends BaseEntity {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long documentsId;
   private String title;
-
-  private String socketId;
-
+  private Long roomIdx;
   private Long writerId;
   private Long modifierId;
 
