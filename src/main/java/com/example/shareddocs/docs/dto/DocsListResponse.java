@@ -13,7 +13,7 @@ public class DocsListResponse {
 
   private String id;
 
-  private Long roomIdx;
+  private String roomIdx;
 
   private String title;
 

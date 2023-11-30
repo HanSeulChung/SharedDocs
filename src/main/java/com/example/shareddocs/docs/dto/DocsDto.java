@@ -1,6 +1,7 @@
 package com.example.shareddocs.docs.dto;
 
 import com.example.shareddocs.docs.entity.mongodb.Docs;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -14,7 +15,7 @@ public class DocsDto {
 
   private String id;
 
-  private Long roomIdx;
+  private String roomIdx;
 
   private String title;
 
@@ -23,6 +24,9 @@ public class DocsDto {
   private Long createMemberId;
 
   private List<Long> memberId;
+
+  private LocalDateTime createdDt;
+  private LocalDateTime updatedDt;
 
   public static List<DocsDto> of(List<Docs> docsList) {
 
@@ -44,6 +48,8 @@ public class DocsDto {
         .content(docs.getContent())
         .createMemberId(docs.getCreateMemberId())
         .memberId(docs.getMemberId())
+        .createdDt(docs.getCreatedDt())
+        .updatedDt(docs.getUpdatedDt())
         .build();
   }
 }

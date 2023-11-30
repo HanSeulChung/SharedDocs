@@ -1,5 +1,6 @@
 package com.example.shareddocs.docs.dto;
 
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -9,5 +10,11 @@ import lombok.Getter;
 @AllArgsConstructor
 public class DocsInitRequest {
 
-  // TODO: 초기 문서 생성하는 input(request) 값
+  private String title;
+
+  private String content;
+
+  private Long createMemberId;
+
+  private List<Long> membersId;
 }
