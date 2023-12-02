@@ -1,23 +1,61 @@
+var docsIdxPage = document.querySelector('#docs-idx-page');
+var docsPage = document.querySelector('#docs-page');
+var docsIdxForm = document.querySelector('#docsIdxForm');
+var docsForm = document.querySelector('#docsForm');
+// var messageInput = document.querySelector('#message');
+var docsArea = document.querySelector('#docsArea');
+var connectingElement = document.querySelector('.connecting');
 
+var stompClient = null;
+var docsIdx = null;
 
-const stompClient = new StompJs.Client({
-  brokerURL: 'ws://localhost:8080/ws'
-});
+var colors = [
+  '#2196F3', '#32c787', '#00BCD4', '#ff5652',
+  '#ffc107', '#ff85af', '#FF9800', '#39bbb0'
+];
 
-stompClient.onConnect = (frame) => {
-  console.log('Connected: ' + frame);
+function connect(event) {
+  event.preventDefault();
 
-  // 구독 설정: 서버에서 클라이언트로 메시지 수신을 위한 구독
-  stompClient.subscribe('/topic/messages', (message) => {
-    console.log('Received message:', message.body);
-    // 메시지 수신 후 처리
+  var docsIdxInput = document.getElementById('docs-idx');
+  docsIdx = docsIdxInput.value.trim();
+
+  if (docsIdx) {
+    var socket = new SockJS('/ws');
+    stompClient = Stomp.over(socket);
+
+    stompClient.connect({}, onConnect, onError);
+  }
+}
+
+function onConnect() {
+  var docsIdxInput = document.getElementById('docs-idx');
+  docsIdx = docsIdxInput.value.trim(); // docsIdx를 재설정
+
+  stompClient.subscribe('/topic/public', function (docs) {
+    displayDocs(JSON.parse(docs.body));
   });
 
-  // 메시지 전송: 클라이언트에서 서버로 메시지 전송
-  stompClient.publish({
-    destination: '/app/sendMessage', // 백엔드의 컨트롤러 매핑 경로
-    body: JSON.stringify({ documentIdx: 'Hello, Server!' }) // 전송할 데이터
-  });
-};
+  var docsMessage = {
+    documentIdx: docsIdx,
+  };
+  stompClient.send("/app/chat.showDocs", {}, JSON.stringify(docsMessage));
+}
 
-stompClient.activate();
+function onError(error) {
+  connectingElement.textContent = 'Could not connect to WebSocket server. Please refresh this page to try again!';
+  connectingElement.style.color = 'red';
+}
+
+// 문서를 표시하는 함수
+function displayDocs(docs) {
+  var docsTitleElement = document.getElementById('docsTitle');
+  var docsContentElement = document.getElementById('docsContent');
+
+  // 서버로부터 받은 문서 정보를 화면에 표시
+  docsTitleElement.textContent = docs.title;
+  docsContentElement.textContent = docs.content;
+}
+
+var docsIdxForm = document.getElementById('docsIdxForm');
+docsIdxForm.addEventListener('submit', connect);
