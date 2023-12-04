@@ -2,7 +2,7 @@ package com.example.shareddocs.docs.entity.mongodb;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import javax.persistence.Id;
+import org.springframework.data.annotation.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
