@@ -1,7 +1,6 @@
 package com.example.shareddocs.docs.entity.mongodb;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import javax.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -32,11 +31,19 @@ public class Docs {
   @Field(name = "content")
   private String content;
 
-  @Field(name = "create_member_id")
-  private Long createMemberId;
+  @Field(name = "writer_id")
+  private Long writerId;
 
-  @Field(name = "member_id")
-  private List<Long> memberId;
+  @Field(name = "modifier_id")
+  private Long modifierId;
+
+  @Field(name = "team_id")
+  private Long teamId;
+
+  // Todo : Comment
+
+//  @Field(name = "member_id")
+//  private List<Long> memberId;
 
   @CreatedDate
   @Field(name = "created_dt")

@@ -20,10 +20,10 @@ public class DocsDto {
   private String title;
 
   private String content;
+  private Long writerId;
+  private Long modifierId;
 
-  private Long createMemberId;
-
-  private List<Long> memberId;
+  private Long teamId;
 
   private LocalDateTime createdDt;
   private LocalDateTime updatedDt;
@@ -46,8 +46,9 @@ public class DocsDto {
         .documentIdx(docs.getDocumentIdx())
         .title(docs.getTitle())
         .content(docs.getContent())
-        .createMemberId(docs.getCreateMemberId())
-        .memberId(docs.getMemberId())
+        .writerId(docs.getWriterId())
+        .modifierId(docs.getModifierId())
+        .teamId(docs.getTeamId())
         .createdDt(docs.getCreatedDt())
         .updatedDt(docs.getUpdatedDt())
         .build();

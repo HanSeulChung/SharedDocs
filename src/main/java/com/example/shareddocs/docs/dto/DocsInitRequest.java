@@ -14,7 +14,5 @@ public class DocsInitRequest {
 
   private String content;
 
-  private Long createMemberId;
-
-  private List<Long> membersId;
+  private Long writerId;
 }

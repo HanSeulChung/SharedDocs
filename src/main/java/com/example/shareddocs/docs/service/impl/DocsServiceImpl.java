@@ -38,8 +38,7 @@ public class DocsServiceImpl implements DocsService {
         .documentIdx(uuid)
         .title(request.getTitle())
         .content(request.getContent())
-        .createMemberId(request.getCreateMemberId())
-        .memberId(request.getMembersId())
+        .writerId(request.getWriterId())
         .build());
 
     // TODO findBy로 다시 찾지 않고 id를 가져오는 방법이 있는지 ?
