@@ -12,7 +12,7 @@ import lombok.Setter;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class DocsMessage {
-
-  private String documentIdx;
+public class DeltaMessage {
+  private String eventName; // 이벤트 유형
+  private Object deltaValue; // Quill에서 받은 변경된 delta 값
 }

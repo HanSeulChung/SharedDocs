@@ -7,8 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public interface DocsRepository extends MongoRepository<Docs, String> {
-    Optional<Docs> findByDocumentIdx(String documentIdx);
-
     @Transactional
-    void deleteByDocumentIdx(String documentIdx);
+    void deleteById(String documentId);
 }

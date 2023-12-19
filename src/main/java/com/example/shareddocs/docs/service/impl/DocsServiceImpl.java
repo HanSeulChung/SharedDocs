@@ -35,28 +35,28 @@ public class DocsServiceImpl implements DocsService {
     // TODO 생성시에도 사용자에 관해서 유효성 검사 추후 추가
     String uuid = UUID.randomUUID().toString();
     docsRepository.save(Docs.builder()
-        .documentIdx(uuid)
         .title(request.getTitle())
         .content(request.getContent())
-        .createMemberId(request.getCreateMemberId())
-        .memberId(request.getMembersId())
+        .writerId(request.getWriterId())
         .build());
 
-    // TODO findBy로 다시 찾지 않고 id를 가져오는 방법이 있는지 ?
-    return DocsDto.of(docsRepository.findByDocumentIdx(uuid).orElseThrow(() -> new NoSuchElementException()));
+    return DocsDto.of(docsRepository.save(Docs.builder()
+        .title(request.getTitle())
+        .content(request.getContent())
+        .writerId(request.getWriterId())
+        .build()));
   }
 
   @Override
   public DeleteDocsResponse deleteDocs(Long teamId, String documentId) {
     //TODO: teamId와 추후 사용자의 SecurityUtils 값을 받아 유효성 검사를 추가해야한다.
-    Docs docs = docsRepository.findByDocumentIdx(documentId)
+    Docs docs = docsRepository.findById(documentId)
         .orElseThrow(() -> new NoSuchElementException());
 
-    docsRepository.deleteByDocumentIdx(documentId);
+    docsRepository.deleteById(documentId);
 
     return DeleteDocsResponse.builder()
         .id(docs.getId())
-        .documentIdx(docs.getDocumentIdx())
         .title(docs.getTitle())
         .message("삭제 되었습니다.")
         .build();

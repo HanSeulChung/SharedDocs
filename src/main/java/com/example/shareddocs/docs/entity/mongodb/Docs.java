@@ -1,30 +1,25 @@
 package com.example.shareddocs.docs.entity.mongodb;
 
 import java.time.LocalDateTime;
-import java.util.List;
-import org.springframework.data.annotation.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 @Getter
 @Builder
-@Document(collection = "shared-docs")
+@Document(collection = "Documents")
 @AllArgsConstructor
 @NoArgsConstructor
 public class Docs {
 
   @Id
-  @Field(name = "_id")
   private String id;
-
-  @Field(name = "document_idx")
-  private String documentIdx;
 
   @Field(name = "title")
   private String title;
@@ -32,11 +27,19 @@ public class Docs {
   @Field(name = "content")
   private String content;
 
-  @Field(name = "create_member_id")
-  private Long createMemberId;
+  @Field(name = "writer_id")
+  private Long writerId;
 
-  @Field(name = "member_id")
-  private List<Long> memberId;
+  @Field(name = "modifier_id")
+  private Long modifierId;
+
+  @Field(name = "team_id")
+  private Long teamId;
+
+//  @DocumentReference
+//  @Field(name = "comment_ids")
+//  @Builder.Default
+//  private List<Comment> commentIds = new ArrayList<>();;
 
   @CreatedDate
   @Field(name = "created_dt")
