@@ -5,6 +5,7 @@ import com.example.shareddocs.docs.dto.DeltaMessage;
 import com.example.shareddocs.docs.dto.DocsDto;
 import com.example.shareddocs.docs.dto.RequestedDocument;
 import com.example.shareddocs.docs.dto.SelectionChangeMessage;
+import com.example.shareddocs.docs.dto.TotalMessage;
 import com.example.shareddocs.docs.entity.mongodb.Docs;
 import com.example.shareddocs.docs.entity.mongodb.DocsRepository;
 import java.util.LinkedHashMap;
@@ -33,6 +34,7 @@ public class DocsWebSocketController {
     return DocsDto.of(docs);
   }
 
+
   @MessageMapping("/doc.updateDocsBySelectionChange")
   public void handleBroadCastBySelectionChange(@Payload DeltaMessage deltaMessage) {
     LinkedHashMap<String, Integer> deltaValue = (LinkedHashMap<String, Integer>) deltaMessage.getDeltaValue();
@@ -43,20 +45,46 @@ public class DocsWebSocketController {
     Integer length = deltaValue.get("length");
 
     SelectionChangeMessage selectionChangeMessage = SelectionChangeMessage.builder()
-          .eventName("selection-change")
-          .index(index)
-          .length(length)
-          .build();
+        .eventName("selection-change")
+        .index(index)
+        .length(length)
+        .build();
     messagingTemplate.convertAndSend("/topic/broadcastBySelectionChange", selectionChangeMessage);
   }
 
   @MessageMapping("/doc.updateDocsByTextChange")
-  public void handleBroadCastByTextChange(@Payload DeltaMessage deltaMessage) {
+  public void handleBroadCastByTextChange(@Payload TotalMessage totalMessage) {
 
-    System.out.println(deltaMessage);
+    System.out.println(totalMessage);
 
-    messagingTemplate.convertAndSend("/topic/broadcastByTextChange", deltaMessage);
+    messagingTemplate.convertAndSend("/topic/broadcastByTextChange", totalMessage);
   }
+
+//
+//  @MessageMapping("/doc.updateDocsBySelectionChange")
+//  public void handleBroadCastBySelectionChange(@Payload DeltaMessage deltaMessage) {
+//    LinkedHashMap<String, Integer> deltaValue = (LinkedHashMap<String, Integer>) deltaMessage.getDeltaValue();
+//
+//    System.out.println(deltaMessage);
+//
+//    Integer index = deltaValue.get("index");
+//    Integer length = deltaValue.get("length");
+//
+//    SelectionChangeMessage selectionChangeMessage = SelectionChangeMessage.builder()
+//          .eventName("selection-change")
+//          .index(index)
+//          .length(length)
+//          .build();
+//    messagingTemplate.convertAndSend("/topic/broadcastBySelectionChange", selectionChangeMessage);
+//  }
+//
+//  @MessageMapping("/doc.updateDocsByTextChange")
+//  public void handleBroadCastByTextChange(@Payload DeltaMessage deltaMessage) {
+//
+//    System.out.println(deltaMessage);
+//
+//    messagingTemplate.convertAndSend("/topic/broadcastByTextChange", deltaMessage);
+//  }
 }
 
 
