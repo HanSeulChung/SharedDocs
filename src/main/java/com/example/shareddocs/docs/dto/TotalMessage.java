@@ -13,5 +13,6 @@ import lombok.Setter;
 @NoArgsConstructor
 public class TotalMessage {
   private String eventName; // 이벤트 유형
+  private String title; // Quill에서 받은 title 값
   private String content; // Quill에서 받은 전체 content 값
 }
