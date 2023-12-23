@@ -18,6 +18,8 @@ public class DocsDto {
   private String title;
 
   private String content;
+  private Long writerId;
+  private Long modifierId;
 
   private Long writerId;
   private Long modifierId;

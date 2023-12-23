@@ -15,5 +15,4 @@ public class DocsInitRequest {
   private String content;
 
   private Long writerId;
-
 }

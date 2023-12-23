@@ -1,6 +1,7 @@
 package com.example.shareddocs.docs.entity.mongodb;
 
 import java.time.LocalDateTime;
+import javax.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -40,6 +41,12 @@ public class Docs {
 //  @Field(name = "comment_ids")
 //  @Builder.Default
 //  private List<Comment> commentIds = new ArrayList<>();;
+
+  @Field(name = "modifier_id")
+  private Long modifierId;
+
+  @Field(name = "team_id")
+  private Long teamId;
 
   @CreatedDate
   @Field(name = "created_dt")
