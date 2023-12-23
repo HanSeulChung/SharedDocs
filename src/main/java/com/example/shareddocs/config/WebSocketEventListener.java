@@ -1,6 +1,6 @@
 package com.example.shareddocs.config;
 
-import com.example.shareddocs.docs.dto.DocsMessage;
+import com.example.shareddocs.docs.dto.RequestedDocument;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;
@@ -19,11 +19,11 @@ public class WebSocketEventListener {
   @EventListener
   public void handleWebSocketDisconnectListener(SessionDisconnectEvent event) {
     StompHeaderAccessor headerAccessor = StompHeaderAccessor.wrap(event.getMessage());
-    String documentIdx = (String) headerAccessor.getSessionAttributes().get("documentIdx");
-    if (documentIdx != null) {
-      log.info("documentIdx disconnected: {}", documentIdx);
-      var docsMessage = DocsMessage.builder()
-          .documentIdx(documentIdx)
+    String documentId = (String) headerAccessor.getSessionAttributes().get("documentId");
+    if (documentId != null) {
+      log.info("documentId disconnected: {}", documentId);
+      var docsMessage = RequestedDocument.builder()
+          .documentId(documentId)
           .build();
       messagingTemplate.convertAndSend("/topic/public", docsMessage);
     }

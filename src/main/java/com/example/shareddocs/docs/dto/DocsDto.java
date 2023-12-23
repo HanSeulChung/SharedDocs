@@ -15,11 +15,12 @@ public class DocsDto {
 
   private String id;
 
-  private String documentIdx;
-
   private String title;
 
   private String content;
+  private Long writerId;
+  private Long modifierId;
+
   private Long writerId;
   private Long modifierId;
 
@@ -43,7 +44,6 @@ public class DocsDto {
   public static DocsDto of(Docs docs) {
     return DocsDto.builder()
         .id(docs.getId())
-        .documentIdx(docs.getDocumentIdx())
         .title(docs.getTitle())
         .content(docs.getContent())
         .writerId(docs.getWriterId())

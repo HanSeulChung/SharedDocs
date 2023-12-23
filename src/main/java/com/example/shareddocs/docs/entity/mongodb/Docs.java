@@ -7,23 +7,20 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 @Getter
 @Builder
-@Document(collection = "shared-docs")
+@Document(collection = "Documents")
 @AllArgsConstructor
 @NoArgsConstructor
 public class Docs {
 
   @Id
-  @Field(name = "_id")
   private String id;
-
-  @Field(name = "document_idx")
-  private String documentIdx;
 
   @Field(name = "title")
   private String title;
@@ -40,10 +37,16 @@ public class Docs {
   @Field(name = "team_id")
   private Long teamId;
 
-  // Todo : Comment
+//  @DocumentReference
+//  @Field(name = "comment_ids")
+//  @Builder.Default
+//  private List<Comment> commentIds = new ArrayList<>();;
 
-//  @Field(name = "member_id")
-//  private List<Long> memberId;
+  @Field(name = "modifier_id")
+  private Long modifierId;
+
+  @Field(name = "team_id")
+  private Long teamId;
 
   @CreatedDate
   @Field(name = "created_dt")

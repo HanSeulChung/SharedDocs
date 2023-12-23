@@ -21,9 +21,9 @@ public class DocsController {
   private final DocsService docsService;
 
   @GetMapping("/team/{teamId}/documents")
-  public ResponseEntity<List<DocsListResponse>> getDocsList(@PathVariable Long teamId) {
+  public ResponseEntity<List<DocsDto>> getDocsList(@PathVariable Long teamId) {
     return ResponseEntity.ok()
-              .body(DocsListResponse.toResponse(docsService.getDocsList()));
+              .body(docsService.getDocsList());
   }
 
   @PostMapping("/team/{teamId}/documents")
